@@ -18,7 +18,7 @@ def db_cursor():
     cursor = None
     try:
         connection = connect_db()
-        cursor = connection.cursor(buffered=True)  # Use buffered cursor to consume all results
+        cursor = connection.cursor(buffered=True)  
         yield cursor
         connection.commit()
     except Error as e:
@@ -53,19 +53,19 @@ def AddOffice(name, address):
 
 class RoleSelector(ctk.CTkFrame):
     def __init__(self, master, app):
-        super().__init__(master, fg_color="transparent")  # Transparent background for cleaner look
+        super().__init__(master, fg_color="transparent")  
         self.app = app
-        self.pack(expand=True, fill="both")  # Center and expand frame
+        self.pack(expand=True, fill="both")  
 
-        # Title label with larger font and bold style
+      
         ctk.CTkLabel(
             self,
             text="Sports Ticketing System\nSelect Your Role",
             font=("Arial", 28, "bold"),
-            text_color="#FFFFFF"  # White text for contrast
+            text_color="#FFFFFF"  
         ).pack(pady=(50, 30))
 
-        # Role buttons with distinct colors and hover effects
+       
         role_styles = {
             "Admin": {"hover_color": "#66D9FF"}, 
             "Manager": {"hover_color": "#66D9FF"},  
@@ -77,9 +77,9 @@ class RoleSelector(ctk.CTkFrame):
                 self,
                 text=role,
                 font=("Arial", 20),
-                width=300,  # Wider buttons
-                height=60,  # Taller buttons
-                corner_radius=10,  # Rounded corners
+                width=300,  
+                height=60,  
+                corner_radius=10,  
                 fg_color=role_styles[role]["hover_color"],
                 hover_color=role_styles[role]["hover_color"],
                 text_color="#000000",
@@ -625,10 +625,9 @@ class CashierPage(ctk.CTkFrame):
         ctk.CTkButton(self, text="Logout", command=lambda: self.master.show_role_page("Role")).pack(pady=10)
 
         self.customer_id = None
-        self.customer_phone = None  # Store the phone number of the selected customer
+        self.customer_phone = None  
         self.event_id = None
 
-        # Initial refresh of Treeview
         self.refresh_customer_tree()
 
     def refresh_customer_tree(self):
@@ -1093,7 +1092,6 @@ class CashierPage(ctk.CTkFrame):
                     mb.showerror("Error", f"Unable to print ticket: {e}")
                     return
 
-        # Sanitize phone number and event name for filename
         sanitized_customer_phone = re.sub(r'[\\/:*?"<>| ]', '', customer_phone)
         if not sanitized_customer_phone:
             sanitized_customer_phone = "Unknown"
